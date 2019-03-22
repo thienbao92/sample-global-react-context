@@ -1,28 +1,35 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component, useContext } from "react";
+import ContextOne from "./states/ContextOne";
+import ContextTwo from "./states/ContextTwo";
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
-}
+import logo from "./logo.svg";
+import "./App.css";
+
+const App = () => {
+  const { ContextOneState, ContextOneDispatch, ContextOneTypes } = useContext(
+    ContextOne.Context
+  );
+
+  const { ContextTwoState, ContextTwoDispatch, ContextTwoTypes } = useContext(
+    ContextTwo.Context
+  );
+
+  console.log(ContextTwoState, ContextOneState);
+  return (
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <button
+          onClick={() => ContextOneDispatch({ type: ContextOneTypes.UPDATE })}
+        >
+          Click
+        </button>
+      </header>
+    </div>
+  );
+};
 
 export default App;
